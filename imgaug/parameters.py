@@ -474,6 +474,7 @@ class StochasticParameter(object): # pylint: disable=locally-disabled, unused-va
         # data = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8, sep='')
         # data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
 
+        # TODO replace by tempfile?
         # This seems to be the newer style to do that:
         data = np.array(fig.canvas.renderer._renderer)
         data = data[:, :, :3]  # matplotlib returns RGBA, for legacy reasons we remove the A here
@@ -562,6 +563,7 @@ class Choice(StochasticParameter):
 
     def _draw_samples(self, size, random_state):
         if any([isinstance(a_i, StochasticParameter) for a_i in self.a]):
+            # TODO replace by derive_random_state()
             seed = random_state.randint(0, 10**6, 1)[0]
             samples = ia.new_random_state(seed).choice(self.a, np.prod(size), replace=self.replace, p=self.p)
 
