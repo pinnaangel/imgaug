@@ -300,7 +300,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test1]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # value without value range as (None, None)
     got_exception = False
@@ -311,7 +311,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test1b]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # stochastic parameter
     got_exception = False
@@ -322,7 +322,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test2]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # value within value range
     got_exception = False
@@ -333,7 +333,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test3]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # value outside of value range
     got_exception = False
@@ -344,7 +344,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test4]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # value within value range (without lower bound)
     got_exception = False
@@ -355,7 +355,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test5]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # value outside of value range (without lower bound)
     got_exception = False
@@ -366,7 +366,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test6]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # value within value range (without upper bound)
     got_exception = False
@@ -377,7 +377,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test7]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # value outside of value range (without upper bound)
     got_exception = False
@@ -388,7 +388,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test8]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # tuple as value, but no tuples allowed
     got_exception = False
@@ -399,7 +399,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test9]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # tuple as value and tuple allowed
     got_exception = False
@@ -410,7 +410,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test10]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # tuple as value and tuple allowed and tuple within value range
     got_exception = False
@@ -421,7 +421,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test11]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # tuple as value and tuple allowed and tuple within value range with allow_floats=False
     got_exception = False
@@ -432,7 +432,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test11b]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # tuple as value and tuple allowed and tuple partially outside of value range
     got_exception = False
@@ -443,7 +443,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test12]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # tuple as value and tuple allowed and tuple fully outside of value range
     got_exception = False
@@ -454,7 +454,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test13]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # list as value, but no list allowed
     got_exception = False
@@ -465,7 +465,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test14]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # list as value and list allowed
     got_exception = False
@@ -476,7 +476,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test15]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # list as value and list allowed and list partially outside of value range
     got_exception = False
@@ -487,7 +487,7 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test16]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # list as value and list allowed and list fully outside of value range
     got_exception = False
@@ -498,27 +498,27 @@ def test_parameters_handle_discrete_param():
     except Exception as e:
         got_exception = True
         assert "[test17]" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
     # single value within value range given as callable
     got_exception = False
     try:
         _ = iap.handle_discrete_param(1, "[test18]", value_range=lambda x: -1 < x < 1, tuple_to_uniform=True,
-                                           list_to_choice=True)
+                                      list_to_choice=True)
     except Exception as e:
         got_exception = True
         assert "[test18]" in str(e)
-    assert got_exception == False
+    assert got_exception is False
 
     # bad datatype for value range
     got_exception = False
     try:
         _ = iap.handle_discrete_param(1, "[test19]", value_range=False, tuple_to_uniform=True,
-                                           list_to_choice=True)
+                                      list_to_choice=True)
     except Exception as e:
         got_exception = True
         assert "Unexpected input for value_range" in str(e)
-    assert got_exception == True
+    assert got_exception is True
 
 
 def test_parameters_handle_probability_param():
@@ -539,7 +539,7 @@ def test_parameters_handle_probability_param():
 
     got_exception = False
     try:
-        p = iap.handle_probability_param("test", "[test4]")
+        _p = iap.handle_probability_param("test", "[test4]")
     except Exception as exc:
         assert "Expected " in str(exc)
         got_exception = True
@@ -547,14 +547,14 @@ def test_parameters_handle_probability_param():
 
     got_exception = False
     try:
-        p = iap.handle_probability_param(-0.01, "[test5]")
+        _p = iap.handle_probability_param(-0.01, "[test5]")
     except AssertionError:
         got_exception = True
     assert got_exception
 
     got_exception = False
     try:
-        p = iap.handle_probability_param(1.01, "[test6]")
+        _p = iap.handle_probability_param(1.01, "[test6]")
     except AssertionError:
         got_exception = True
     assert got_exception
