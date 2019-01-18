@@ -605,7 +605,7 @@ def test_parameters_both_np_float_if_one_is_float():
     assert b2.dtype.type == np.float64, b2.dtype.type
 
 
-def Xtest_parameters_draw_distribution_grid():
+def test_parameters_draw_distribution_grid():
     params = [iap.Deterministic(1), iap.Uniform(0, 1.0)]
     graph1 = params[0].draw_distribution_graph(size=(100000,))
     graph2 = params[1].draw_distribution_graph(size=(100000,))
