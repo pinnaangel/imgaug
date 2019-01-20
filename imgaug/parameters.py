@@ -10,6 +10,7 @@ import six.moves as sm
 import scipy
 
 from . import imgaug as ia
+from . import dtypes as iadt
 from .external.opensimplex import OpenSimplex
 
 
@@ -1189,24 +1190,19 @@ class FromLowerResolution(StochasticParameter):
             # important for e.g. binomial distributios used in FromLowerResolution and thereby in
             # e.g. CoarseDropout, where integer-kinds would lead to sharp edges despite using
             # cubic interpolation.
-
-            # TODO had to temporarily move this here due to travis breaking from circular imports
-            # beautify this
-            from .augmenters import meta
-
             if samples.dtype.kind == "f":
-                samples = meta.restore_dtypes_(samples, np.float32)
+                samples = iadt.restore_dtypes_(samples, np.float32)
             elif samples.dtype.kind == "i":
                 if method == "nearest":
-                    samples = meta.restore_dtypes_(samples, np.int32)
+                    samples = iadt.restore_dtypes_(samples, np.int32)
                 else:
-                    samples = meta.restore_dtypes_(samples, np.float32)
+                    samples = iadt.restore_dtypes_(samples, np.float32)
             else:
                 assert samples.dtype.kind == "u"
                 if method == "nearest":
-                    samples = meta.restore_dtypes_(samples, np.uint16)
+                    samples = iadt.restore_dtypes_(samples, np.uint16)
                 else:
-                    samples = meta.restore_dtypes_(samples, np.float32)
+                    samples = iadt.restore_dtypes_(samples, np.float32)
 
             samples_upscaled = ia.imresize_many_images(samples, (h, w), interpolation=method)
 

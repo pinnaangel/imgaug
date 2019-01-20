@@ -43,6 +43,7 @@ import six.moves as sm
 from .. import imgaug as ia
 from .. import parameters as iap
 
+"""
 KIND_TO_DTYPES = {
     "i": ["int8", "int16", "int32", "int64"],
     "u": ["uint8", "uint16", "uint32", "uint64"],
@@ -240,6 +241,7 @@ def clip_to_dtype_value_range_(array, dtype, validate=True, validate_values=None
         assert min_value <= max_value_found <= max_value
     array = np.clip(array, min_value, max_value, out=array)
     return array
+"""
 
 
 def clip_augmented_image_(image, min_value, max_value):
@@ -1416,7 +1418,7 @@ class Augmenter(object):  # pylint: disable=locally-disabled, unused-variable, l
         if random_state is None:
             random_state = ia.current_random_state()
         elif isinstance(random_state, np.random.RandomState):
-            pass # just use the provided random state without change
+            pass  # just use the provided random state without change
         else:
             random_state = ia.new_random_state(random_state)
 
@@ -3084,11 +3086,11 @@ class Lambda(Augmenter):
         if self.func_heatmaps is not None:
             result = self.func_heatmaps(heatmaps, random_state, parents, hooks)
             ia.do_assert(ia.is_iterable(result),
-                         "Expected callback function for heatmaps to return list of imgaug.HeatmapsOnImage() instances, "
-                         + "got %s." % (type(result),))
+                         "Expected callback function for heatmaps to return list of imgaug.HeatmapsOnImage() "
+                         + "instances, got %s." % (type(result),))
             ia.do_assert(all([isinstance(el, ia.HeatmapsOnImage) for el in result]),
-                         "Expected callback function for heatmaps to return list of imgaug.HeatmapsOnImage() instances, "
-                         + "got %s." % ([type(el) for el in result],))
+                         "Expected callback function for heatmaps to return list of imgaug.HeatmapsOnImage() "
+                         + "instances, got %s." % ([type(el) for el in result],))
             return result
         return heatmaps
 
@@ -3096,11 +3098,11 @@ class Lambda(Augmenter):
         if self.func_keypoints is not None:
             result = self.func_keypoints(keypoints_on_images, random_state, parents, hooks)
             ia.do_assert(ia.is_iterable(result),
-                         "Expected callback function for keypoints to return list of imgaug.KeypointsOnImage() instances, "
-                         + "got %s." % (type(result),))
+                         "Expected callback function for keypoints to return list of imgaug.KeypointsOnImage() "
+                         + "instances, got %s." % (type(result),))
             ia.do_assert(all([isinstance(el, ia.KeypointsOnImage) for el in result]),
-                         "Expected callback function for keypoints to return list of imgaug.KeypointsOnImage() instances, "
-                         + "got %s." % ([type(el) for el in result],))
+                         "Expected callback function for keypoints to return list of imgaug.KeypointsOnImage() "
+                         + "instances, got %s." % ([type(el) for el in result],))
             return result
         return keypoints_on_images
 
